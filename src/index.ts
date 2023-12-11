@@ -1,0 +1,10 @@
+import { configEnv } from "./config/EnvExtracter";
+import { connect } from "./config/database/connection";
+import express from "express";
+import { UsersRouter } from "./routes/usersRouetes";
+configEnv();
+connect();
+const app = express();
+app.use(express.json());
+app.listen(8080);
+app.use("/api/v1/people", UsersRouter);

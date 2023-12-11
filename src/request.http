@@ -1,0 +1,27 @@
+### sendUser
+POST  http://localhost:8080/api/v1/people
+Content-Type: application/json
+
+{
+  "name": {
+    "firstName": "Bruce",
+    "lastName": "Wayne"
+  },
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "contry": "Anystate",
+    "houseNumber": "123",
+    "zip": "12345"
+  },
+  "image": {
+    "alt": "user-profile",
+    "url": "https://picsum.photos/200/300"
+  },
+  "phone": "054-63889",
+  "email": "bruce12@batcave.com",
+  "isBusniess": true,
+  "password": "123456aA!"
+}
+### getALLusers
+GET   http://localhost:8080/api/v1/people
