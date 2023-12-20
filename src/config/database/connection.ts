@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { configEnv } from "../EnvExtracter";
 const connect = async () => {
+  
   try {
     if (process.env.DB_CONNECTION_STRING) {
       await mongoose.connect(process.env.DB_CONNECTION_STRING);
