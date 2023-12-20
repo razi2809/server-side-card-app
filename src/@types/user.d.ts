@@ -1,14 +1,16 @@
+import { ObjectIdExpression } from "mongoose";
+
 type IName = {
-  firstName: string;
-  middleName: string;
-  lastName: string;
+  first: string;
+  middle: string;
+  last: string;
 };
 type IAddress = {
   houseNumber: number;
   street: string;
   city: string;
   state?: string;
-  contry: string;
+  country: string;
   zip?: string;
 };
 type IImage = {
@@ -20,11 +22,20 @@ type IUser = {
   email: string;
   password: string;
   isAdmin?: boolean;
-  isBusniess: boolean;
+  isBusiness: boolean;
   createdAt?: Date;
   name: IName;
   address: IAddress;
   image: IImage;
 };
+type ILogin = {
+  email: string;
+  password: string;
+};
+type JWTpayload = {
+  email: string;
+  iat?: string;
+  userId: TypeExpressionOperatorReturningObjectId;
+};
 
-export { IUser, IName, IAddress, IImage };
+export { IUser, IName, IAddress, IImage, ILogin, JWTpayload };

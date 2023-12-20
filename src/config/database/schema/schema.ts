@@ -1,16 +1,16 @@
 import { Schema } from "mongoose";
 import { IAddress, IImage, IName, IUser } from "../../../@types/user";
-
+import { Icard } from "../../../@types/card";
 const nameSchema = new Schema<IName>({
-  firstName: {
+  first: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 255,
     default: "",
   },
-  middleName: { type: String, required: false, minlength: 2, maxlength: 255 },
-  lastName: {
+  middle: { type: String, required: false,  maxlength: 255 },
+  last: {
     type: String,
     required: true,
     minlength: 2,
@@ -18,13 +18,13 @@ const nameSchema = new Schema<IName>({
     default: "",
   },
 });
-const adressSchema = new Schema<IAddress>({
+const addressSchema = new Schema<IAddress>({
   houseNumber: { type: Number, required: true },
   street: { type: String, required: true, minlength: 2, maxlength: 255 },
   city: { type: String, required: true, minlength: 2, maxlength: 255 },
-  state: { type: String, required: false, minlength: 2, maxlength: 255 },
-  contry: { type: String, required: true, minlength: 2, maxlength: 255 },
-  zip: { type: String, required: false, minlength: 2, maxlength: 255 },
+  state: { type: String, required: false, maxlength: 255 },
+  country: { type: String, required: true, minlength: 2, maxlength: 255 },
+  zip: { type: String, required: false,maxlength: 255 },
 });
 const imageSchema = new Schema<IImage>({
   alt: { type: String, default: "user profile" },
@@ -34,7 +34,7 @@ const imageSchema = new Schema<IImage>({
   },
 });
 const userSchema = new Schema<IUser>({
-  phone: { type: String, required: true, unique: true },
+  phone: { type: String, required: true, unique: false },
   email: {
     type: String,
     required: true,
@@ -44,10 +44,29 @@ const userSchema = new Schema<IUser>({
   },
   password: { type: String, required: true },
   isAdmin: { type: Boolean, default: false },
-  isBusniess: { type: Boolean, default: false },
+  isBusiness: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
   name: nameSchema,
-  address: adressSchema,
+  address: addressSchema,
   image: imageSchema,
 });
-export { userSchema, adressSchema, imageSchema };
+const cardSchema = new Schema<Icard>({
+  phone: { type: String, required: true, unique: false },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 5,
+    maxlength: 255,
+  },
+  description: { type: String, required: true },
+  likes: { type: Array },
+  web: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now },
+  address: addressSchema,
+  image: imageSchema,
+  user_id: { type: String, required: true },
+});
+export { userSchema, addressSchema, imageSchema, cardSchema };

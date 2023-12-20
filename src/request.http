@@ -1,5 +1,5 @@
 ### sendUser
-POST  http://localhost:8080/api/v1/people
+POST  http://localhost:8080/users
 Content-Type: application/json
 
 {
@@ -18,10 +18,115 @@ Content-Type: application/json
     "alt": "user-profile",
     "url": "https://picsum.photos/200/300"
   },
-  "phone": "054-63889",
-  "email": "bruce12@batcave.com",
-  "isBusniess": true,
+  "phone": "0566388527",
+  "email": "brucex24@batcave.com",
+  "isBusiness": true,
   "password": "123456aA!"
 }
 ### getALLusers
-GET   http://localhost:8080/api/v1/people
+GET   http://localhost:8080/users
+Authorization:  bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJydWNleEBiYXRjYXZlLmNvbSIsImlhdCI6MTcwMjcyOTIzMn0.nLlZJfOB5Iaz2DWR_Q4iucZXUqYHQZ5O8KlKdkuRz9M
+### getUserLogin
+POST    http://localhost:8080/users/login
+Content-Type: application/json
+
+  {
+   "email": "brucex243@batcave.com",
+    "password": "123456aA!"
+}
+### getTheuser
+GET   http://localhost:8080/users/65816aa2947f86daf70fad8f
+Authorization:  bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJydWNleDI0M0BiYXRjYXZlLmNvbSIsInVzZXJJZCI6IjY1N2Q5NWQ5ZmY5YmY5ODVhMDYxYTVjYyIsImlhdCI6MTcwMjk3MjA3MX0.s0QJ3YXsPV62GGRsKvPgFF9CRhdSx0H00NXgl7vTfdg
+### updateTheUser
+PUT http://localhost:8080/users/657daa63ffa84aa8175a7fcc
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJydWNleDI0M0BiYXRjYXZlLmNvbSIsInVzZXJJZCI6IjY1N2Q5NWQ5ZmY5YmY5ODVhMDYxYTVjYyIsImlhdCI6MTcwMjk3MjA3MX0.s0QJ3YXsPV62GGRsKvPgFF9CRhdSx0H00NXgl7vTfdg
+
+
+{
+  "name": {
+    "firstName": "da7m12a",
+    "lastName": "Wa124yne"
+  },
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "contry": "Anystate",
+    "houseNumber": "123",
+    "zip": "12345"
+  },
+  "image": {
+    "alt": "user-profile",
+    "url": "https://picsum.photos/200/300"
+  },
+  "phone": "0566388527"
+}
+### updateTheUser
+DELETE  http://localhost:8080/users/65816aa2947f86daf70fad8f
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJydWNleDI0M0BiYXRjYXZlLmNvbSIsInVzZXJJZCI6IjY1N2Q5NWQ5ZmY5YmY5ODVhMDYxYTVjYyIsImlhdCI6MTcwMjk3MjA3MX0.s0QJ3YXsPV62GGRsKvPgFF9CRhdSx0H00NXgl7vTfdg
+###post card
+POST http://localhost:8080/cards
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJydWNleDI0M0BiYXRjYXZlLmNvbSIsInVzZXJJZCI6IjY1N2Q5NWQ5ZmY5YmY5ODVhMDYxYTVjYyIsImlhdCI6MTcwMjk3MjA3MX0.s0QJ3YXsPV62GGRsKvPgFF9CRhdSx0H00NXgl7vTfdg
+
+
+{
+  "title": "a wonderful new card",
+  "subtitle": "a test value for this card",
+  "description": "a test value for new card\na test value for new card\n",
+  "phone": "0546388977",
+  "email": "qwe2243@gmail.com",
+  "web": "www.bing.com",
+  "image": {
+    "url": "https://img.izismile.com/img/img13/20201030/640/you_have_never_seen_something_like_this_640_36.jpg",
+    "alt": "image of something"
+  },
+  "address": {
+    "state": "IL",
+    "contry": "Israel",
+    "city": "Arad",
+    "street": "Shoham",
+    "houseNumber": 5,
+    "zip": 8920435
+  }
+}
+### getAllCards
+GET http://localhost:8080/cards
+### likeOrUnlike
+PATCH http://localhost:8080/cards/65800180178907631834b501
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJydWNleEBiYXRjYXZlLmNvbSIsInVzZXJJZCI6IjY1N2Q5NjAxZmY5YmY5ODVhMDYxYTVkNiIsImlhdCI6MTcwMjg5MzQ5MH0.AW0GVUP8rzqipQdniQlAwR0HxX0oIsygePfwQpbAgBE
+### getMyCard
+GET  http://localhost:8080/cards/my-cards
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJydWNleDI0M0BiYXRjYXZlLmNvbSIsInVzZXJJZCI6IjY1N2Q5NWQ5ZmY5YmY5ODVhMDYxYTVjYyIsImlhdCI6MTcwMjkwNjc2M30.okGVKtKKrIsXsLMzn_ziXjiE5JSaFgiOPJvNRPOZzYs
+### getCard
+GET  http://localhost:8080/cards/65800180178907631834b501
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJydWNleDI0M0BiYXRjYXZlLmNvbSIsInVzZXJJZCI6IjY1N2Q5NWQ5ZmY5YmY5ODVhMDYxYTVjYyIsImlhdCI6MTcwMjkwNjc2M30.okGVKtKKrIsXsLMzn_ziXjiE5JSaFgiOPJvNRPOZzYs
+### updateCard
+Put  http://localhost:8080/cards/65800180178907631834b501
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJydWNleDI0M0BiYXRjYXZlLmNvbSIsInVzZXJJZCI6IjY1N2Q5NWQ5ZmY5YmY5ODVhMDYxYTVjYyIsImlhdCI6MTcwMjk3MjA3MX0.s0QJ3YXsPV62GGRsKvPgFF9CRhdSx0H00NXgl7vTfdg
+
+{
+  "title": "a wonderful new card",
+  "subtitle": "a test value for this card",
+  "description": "a test value for new card\na test value for new card\n",
+  "phone": "0546388977",
+  "email": "q12@gmail.com",
+  "web": "www.bing.com",
+  "image": {
+    "url": "https://img.izismile.com/img/img13/20201030/640/you_have_never_seen_something_like_this_640_36.jpg"
+  },
+  "address": {
+    "state": "IL",
+    "contry": "Israel",
+    "city": "Arad",
+    "street": "Shoham",
+    "houseNumber": 5,
+    "zip": 8920435
+  }
+}
+### delete a card
+DELETE http://localhost:8080/cards/658025f2dfe37add8c6782fa
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJydWNleDI0M0BiYXRjYXZlLmNvbSIsInVzZXJJZCI6IjY1N2Q5NWQ5ZmY5YmY5ODVhMDYxYTVjYyIsImlhdCI6MTcwMjk3MjA3MX0.s0QJ3YXsPV62GGRsKvPgFF9CRhdSx0H00NXgl7vTfdg

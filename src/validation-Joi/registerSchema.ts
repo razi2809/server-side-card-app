@@ -1,28 +1,22 @@
 import Joi from "joi";
-import validation from "./validation";
+import validation from "./validationSchema";
 import { IAddress, IImage, IName, IUser } from "../@types/user";
+import { phonePattern } from "./patterns/phonePattern";
+import { passwordPattern } from "./patterns/passwordPattern";
 
 const registerSchema = Joi.object<IUser>({
   name: Joi.object<IName>({
-    firstName: Joi.string().min(2).max(256).required(),
-    middleName: Joi.string().min(2).max(256).allow(""),
-    lastName: Joi.string().min(2).max(256).required(),
+    first: Joi.string().min(2).max(256).required(),
+    middle: Joi.string().min(2).max(256).allow(""),
+    last: Joi.string().min(2).max(256).required(),
   }),
-  phone: Joi.string()
-    .min(9)
-    .max(11)
-    .pattern(/^\+?(972|0)(\-)?0?(([23489]{1}\d{7})|[5]{1}\d{8})$/)
-    .required(),
+  phone: Joi.string().min(9).max(11).pattern(phonePattern).required(),
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .min(5)
     .required(),
   password: Joi.string()
-    .pattern(
-      new RegExp(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*-])[A-Za-z\d!@#$%^&*-]{6,}$/
-      )
-    )
+    .pattern(passwordPattern)
     .messages({
       "string.pattern.base": "the password should be...",
       "string.empty":
@@ -32,15 +26,15 @@ const registerSchema = Joi.object<IUser>({
     .max(20)
     .required(),
   isAdmin: Joi.boolean().default(false),
-  isBusniess: Joi.boolean().default(false),
+  isBusiness: Joi.boolean().default(false),
   createdAt: Joi.date().default(Date.now),
   address: Joi.object<IAddress>({
     houseNumber: Joi.number().required(),
     street: Joi.string().min(2).max(256).required(),
     city: Joi.string().min(2).max(256).required(),
     state: Joi.string().min(2).max(256).allow(""),
-    contry: Joi.string().min(2).max(256).required(),
-    zip: Joi.string().min(2).max(256).allow(""),
+    country: Joi.string().min(2).max(256).required(),
+    zip: Joi.number(),
   }),
   image: Joi.object<IImage>({
     alt: Joi.string().allow(""),
@@ -48,7 +42,4 @@ const registerSchema = Joi.object<IUser>({
   }),
 });
 
-const validateRegister = (inputToCheck: IUser) =>
-  validation(registerSchema, inputToCheck);
-
-export { validateRegister };
+export { registerSchema };

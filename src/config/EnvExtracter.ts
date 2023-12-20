@@ -8,5 +8,7 @@ const configEnv = () => {
   config({
     path: `src/config/${Mode}.env`,
   });
+  console.log(`app is ruuning in ${Mode} mode`);
+  
 };
 export { configEnv };
