@@ -12,6 +12,9 @@ const cardService = {
   likeOrUnlike: async (userId: string, cardId: string) => {
     try {
       const card = await Card.findOne({ _id: cardId }).lean();
+      if (!card) {
+        throw new myError("Couldn't find card", 404);
+      }
       if (card?.likes.includes(userId)) {
         await Card.updateOne({ _id: cardId }, { $pull: { likes: userId } });
         return "unlike seccessful";
