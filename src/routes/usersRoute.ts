@@ -53,7 +53,7 @@ router.post("/login", validatUserLogin, async (req, res, next) => {
 });
 router.get("/:id", isAdminOrtheRegisterUser, async (req, res, next) => {
   try {
-    const user = req.user;
+    const user = req.user as IUser;
     if (user) {
       const { password, ...rest } = user;
       res.status(200).json({

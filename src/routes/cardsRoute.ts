@@ -71,12 +71,15 @@ router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const card = await cardService.getCardById(id);
-    if (card) {
-      res.status(200).json({
-        message: "card were successfully retrieved",
-        card,
+    if (!card) {
+      return res.status(404).json({
+        message: "card not found in data base",
       });
     }
+    return res.status(200).json({
+      message: "card were successfully retrieved",
+      card,
+    });
   } catch (err) {
     return next(err);
   }
@@ -105,11 +108,10 @@ router.delete("/:id", isAdminOrtheCardCreator, async (req, res, next) => {
     const { id } = req.params;
 
     const deleteCard = await cardService.deleteCard(id);
-    if (deleteCard instanceof myError) {
-      throw new Error();
-    } else if (deleteCard) {
-      res.status(200).json({ message: "card deleted successfully" });
+    if (!deleteCard) {
+      return res.status(500).json({ message: "card deleted failed" });
     }
+    return res.status(200).json({ message: "card deleted successfully" });
   } catch (e) {
     return next(new myError("could'nt delete", 400));
   }

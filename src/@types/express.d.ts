@@ -1,12 +1,13 @@
-import { JWTpayload } from "./user";
+import { IUser, JWTpayload } from "./user";
 import { User, Card } from "../config/database/model/models";
+import { Icard } from "./card";
 
 declare global {
   namespace Express {
     interface Request {
-      user?: User;
+      user?: IUser;
       JWT?: JWTpayload;
-      card?: Card;
+      card?: Icard;
     }
   }
 }

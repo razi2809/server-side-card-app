@@ -19,6 +19,7 @@ const isAdminOrtheCardCreator: RequestHandler = async (req, res, next) => {
       const { email, userId } = tokenType;
       const user = await authService.findUserByEmail(email);
       const card = await cardService.getCardById(id);
+      if (!card) return next(new myError("card not found", 404));
       const isAdmin = user?.isAdmin ? true : false;
       if (!isAdmin) {
         if (card?.user_id.toString() != userId) {

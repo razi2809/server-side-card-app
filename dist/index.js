@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const EnvExtracter_1 = require("./config/EnvExtracter");
+const connection_1 = require("./config/database/connection");
+const express_1 = __importDefault(require("express"));
+const usersRouetes_1 = require("./routes/usersRouetes");
+const errorHandler_1 = require("./error/errorHandler");
+const cardsRouetes_1 = require("./routes/cardsRouetes");
+var cors = require("cors");
+const app = (0, express_1.default)();
+app.set('trust proxy', true);
+(0, EnvExtracter_1.configEnv)();
+app.use(cors({ origin: process.env.CLIENT_URL }));
+(0, connection_1.connect)();
+app.use(express_1.default.json());
+app.listen(8080);
+app.use("/users", usersRouetes_1.UsersRouter);
+app.use("/cards", cardsRouetes_1.CardsRouter);
+app.use(errorHandler_1.errorHandler);

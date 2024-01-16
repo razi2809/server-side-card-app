@@ -10,24 +10,34 @@ const cardService = {
     return card.save();
   },
   likeOrUnlike: async (userId: string, cardId: string) => {
-    const card = await Card.findOne({ _id: cardId }).lean();
-    if (card?.likes.includes(userId)) {
-      await Card.updateOne({ _id: cardId }, { $pull: { likes: userId } });
-      return "unlike seccessful";
-    } else {
-      // If user hasn't liked the card yet, add their like
-      await Card.updateOne({ _id: cardId }, { $addToSet: { likes: userId } });
-      return "like seccessful";
+    try {
+      const card = await Card.findOne({ _id: cardId }).lean();
+      if (card?.likes.includes(userId)) {
+        await Card.updateOne({ _id: cardId }, { $pull: { likes: userId } });
+        return "unlike seccessful";
+      } else {
+        // If user hasn't liked the card yet, add their like
+        await Card.updateOne({ _id: cardId }, { $addToSet: { likes: userId } });
+        return "like seccessful";
+      }
+    } catch (err) {
+      throw err;
     }
   },
   getMycards: async (userId: string) => {
-    const cards = await Card.find({ user_id: userId });
-
-    return cards;
+    try {
+      const cards = await Card.find({ user_id: userId });
+      return cards;
+    } catch (err) {
+      throw err;
+    }
   },
   getCardById: async (cardId: string) => {
-    const card = await Card.findOne({ _id: cardId });
-    return card;
+    try {
+      return await Card.findOne({ _id: cardId });
+    } catch (e) {
+      throw e;
+    }
   },
   updateCard: async (cardId: string, newcard: Icard) => {
     // console.log(cardId, newcard);
@@ -47,19 +57,18 @@ const cardService = {
       }
       return updatedCard;
     } catch (error) {
-      console.log(error);
-
       throw new myError("Update operation failed", 500);
     }
   },
   deleteCard: async (cardId: string) => {
     try {
       const deleteCard = await Card.findOneAndDelete({ _id: cardId });
-      if (deleteCard) {
-        return "success";
+      if (!deleteCard) {
+        throw new myError("card not found", 404);
       }
+      return "success";
     } catch (e) {
-      return new myError("delete was unseccessful", 400);
+      throw new myError("delete was unseccessful", 400);
     }
   },
 };
