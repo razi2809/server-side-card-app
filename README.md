@@ -1,8 +1,8 @@
-# RazicardApp
+# server-side-card-app
 
 ## Introduction
 
-RazicardApp is a comprehensive Node.js application designed to streamline card management operations. Built on Ubuntu, this application leverages the power of Express.js, offering robust API endpoints for various card-related functionalities. The application is secured using JWT (JSON Web Tokens) and utilizes Joi for request validation, bcrypt for password hashing, Morgan for logging, and CORS for cross-origin resource sharing.
+card-app-backEnd is a comprehensive Node.js application designed to streamline card management operations. Built on Ubuntu, this application leverages the power of Express.js, offering robust API endpoints for various card-related functionalities. The application is secured using JWT (JSON Web Tokens) and utilizes Joi for request validation, bcrypt for password hashing, Morgan for logging, and CORS for cross-origin resource sharing.
 
 ## Features
 
@@ -43,5 +43,5 @@ npm install
 # PORT, DATABASE_URL, JWT_SECRET, etc.
 
 # Start the Application
-npm start
+npm run watch
 ```
