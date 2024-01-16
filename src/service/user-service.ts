@@ -52,7 +52,7 @@ const userService = {
         { new: true }
       );
       if (!updatedUser) {
-        throw new myError("user not found", 404);
+        throw new Error();
       }
       return updatedUser;
     } catch (error) {
