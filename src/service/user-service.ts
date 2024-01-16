@@ -9,23 +9,27 @@ const userService = {
     return user.save();
   },
   validateUser: async (email: string, password: string) => {
-    const user = await authService.findUserByEmail(email);
-    if (!user) {
-      throw new myError("invalid credentials", 401);
-    }
-    const isValid = await authService.validatePasswords(
-      password,
-      user.password
-    );
+    try {
+      const user = await authService.findUserByEmail(email);
+      if (!user) {
+        throw new myError("invalid credentials", 401);
+      }
+      const isValid = await authService.validatePasswords(
+        password,
+        user.password
+      );
 
-    if (!isValid) {
-      throw new myError("invalid credentials", 401);
+      if (!isValid) {
+        throw new myError("invalid credentials", 401);
+      }
+      const jwt = authService.generateToken({
+        email: user.email,
+        userId: user._id,
+      });
+      return { jwt, user };
+    } catch (err) {
+      throw err;
     }
-    const jwt = authService.generateToken({
-      email: user.email,
-      userId: user._id,
-    });
-    return { jwt, user };
   },
   deleteUser: async (id: string) => {
     try {
