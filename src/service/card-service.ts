@@ -1,8 +1,7 @@
 import { Icard } from "../@types/card";
 import { IUser } from "../@types/user";
-import { Card, User } from "../config/database/model/models";
+import { Card } from "../config/database/model/models";
 import { myError } from "../error/error";
-import authService from "./auth-service";
 const cardService = {
   createCard: async (cardData: Icard, userId: string) => {
     const card = new Card(cardData);
