@@ -82,7 +82,7 @@ router.put(
         }
       } else return res.status(400).json("user not found");
     } catch (error) {
-      return next(new myError("could'nt update", 400));
+      return next(error);
     }
   }
 );
